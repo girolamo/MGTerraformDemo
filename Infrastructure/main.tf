@@ -22,19 +22,6 @@ resource "azurerm_storage_account" "demo_website_sa" {
   }
 }
 
-resource "azurerm_storage_container" "demo_website_container" {
-  name                  = "tfstate"
-  storage_account_name  = azurerm_storage_account.demo_website_sa.name
-  container_access_type = "private"
-}
-
-resource "azurerm_storage_blob" "index_website" {
-  name                   = "demo-index.html"
-  storage_account_name   = azurerm_storage_account.demo_website_sa.name
-  storage_container_name = azurerm_storage_container.demo_website_container.name
-  type                   = "Block"
-}
-
 resource "azurerm_cdn_frontdoor_profile" "demo_website_fd" {
   name                = "MGTerraformDemoWebsiteFD"
   resource_group_name = azurerm_resource_group.demo_website_rg.name
